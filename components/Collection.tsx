@@ -4,10 +4,12 @@ import Link from "next/link";
 
 const Collections = async () => {
   const collections = await getCollections();
-  console.log(collections);
   return (
     <div className="flex flex-col items-center gap-10 py-8 px-5">
       <p className="text-heading1-bold">Collections</p>
+      {!collections || collections.length === 0 ? (
+        <p className="text-body-bold">No Collection !!</p>
+      ) : (
         <div className="flex flex-wrap items-center justify-center gap-8">
           {collections.map((collection: CollectionType) => (
             <Link href={`/collections/${collection._id}`} key={collection._id}>
@@ -17,11 +19,12 @@ const Collections = async () => {
                 alt={collection.title}
                 width={350}
                 height={200}
-                className="rounded-lg cursor-pointer"
+                className="rounded-lg cursor-pointer border-[1.5px] border-black"
               />
             </Link>
           ))}
         </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Collection from "@/components/Collection";
+import Productlist from "@/components/Productlist";
 
 export default async function Home() {
   return (
@@ -12,6 +13,7 @@ export default async function Home() {
         className="w-screen"
       />
       <Collection />
+      <Productlist />
     </>
-  );
+  );  
 }
