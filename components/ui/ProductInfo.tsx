@@ -1,8 +1,11 @@
 "use client";
+import useCart from "@/lib/hooks/cart";
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
 import React, { useState } from "react";
 
 function ProductInfo({ productInfo }: { productInfo: ProductType }) {
+  const cart = useCart();
+
   const [selectedColor, setSelectedColor] = useState<string>(
     productInfo.colors[0]
   );
@@ -10,6 +13,7 @@ function ProductInfo({ productInfo }: { productInfo: ProductType }) {
     productInfo.sizes[0]
   );
   const [quantity, setQuantity] = useState<number>(1);
+
 
   return (
     <div className="max-w-[400px] flex flex-col gap-4">
@@ -85,28 +89,36 @@ function ProductInfo({ productInfo }: { productInfo: ProductType }) {
         <div className="">
           <p className="text-base-medium text-grey-2">Quantity:</p>
           <div className="flex gap-4 items-center mt-3">
-            { productInfo. ? (
-
-            ) : ( 
-
+            {productInfo.quantity > 0 ? (
+              <p className="text-body-bold text-red-700">In stock</p>
+            ) : (
+              <p className="text-body-semibold text-green-800">Out of stock</p>
             )}
           </div>
         </div>
       </div>
 
-      <button
-        className="outline text-base-bold py-3 rounded-lg hover:bg-black hover:text-white"
-        // onClick={() => {
-        //   cart.addItem({
-        //     item: productInfo,
-        //     quantity,
-        //     color: selectedColor,
-        //     size: selectedSize,
-        //   });
-        // }}
-      >
-        Add To Cart
-      </button>
+      <>
+        {productInfo.quantity > 0 ? (
+          <button
+            className="outline text-base-bold py-3 rounded-lg hover:bg-black hover:text-white"
+            onClick={() => {
+              cart.addItem({
+                item: productInfo,
+                quantity,
+                color: selectedColor,
+                size: selectedSize,
+              });
+            }}
+          >
+            Add To Cart
+          </button>
+        ) : (
+          <p className="border-b-[2px] border-black py-3 text-body-semibold text-green-800 text-center">
+            Product will in quantity soon
+          </p>
+        )}
+      </>
     </div>
   );
 }

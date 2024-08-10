@@ -1,6 +1,6 @@
 "use client";
 
-// import useCart from "@/lib/hooks/useCart";
+import useCart from "@/lib/hooks/cart";
 
 import { UserButton, useUser } from "@clerk/nextjs";
 import { CircleUserRound, Menu, Search, ShoppingCart } from "lucide-react";
@@ -10,6 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Navbar = () => {
+  const cart = useCart()
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useUser();
@@ -75,7 +76,7 @@ const Navbar = () => {
           className="flex items-center gap-3 border rounded-lg px-2 py-1 hover:bg-black hover:text-white max-md:hidden"
         >
           <ShoppingCart />
-          {/* <p className="text-base-bold">Cart ({cart.cartItems.length})</p> */}
+          <p className="text-base-bold">Cart ({cart.cartItems.length})</p>
         </Link>
 
         <Menu

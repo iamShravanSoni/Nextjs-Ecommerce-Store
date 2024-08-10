@@ -9,7 +9,6 @@ const CollectionDetails = async ({
   params: { collectionId: string };
 }) => {
   const collectionDetail = await getCollectionDetail(params.collectionId);
-  console.log(collectionDetail);
   
 
   return (
