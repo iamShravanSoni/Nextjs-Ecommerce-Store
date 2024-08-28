@@ -2,6 +2,7 @@
 import useCart from "@/lib/hooks/cart";
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
 import React, { useState } from "react";
+import HeartFavorite from "../HeartFavorite";
 
 function ProductInfo({ productInfo }: { productInfo: ProductType }) {
   const cart = useCart();
@@ -19,6 +20,7 @@ function ProductInfo({ productInfo }: { productInfo: ProductType }) {
     <div className="max-w-[400px] flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <p className="text-heading3-bold">{productInfo.title}</p>
+        <HeartFavorite product={productInfo} />
       </div>
 
       <div className="flex gap-2">

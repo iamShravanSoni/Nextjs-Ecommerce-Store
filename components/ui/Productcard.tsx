@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
+import HeartFavorite from '../HeartFavorite';
 
 interface ProductCardProps {
   product: ProductType;
+  updateSignedInUser?: (updatedUser: UserType) => void;
 }
 
-function Productcard({product}: ProductCardProps) {
+function Productcard({product, updateSignedInUser}: ProductCardProps) {
   return (
     <Link
       href={`/products/${product._id}`}
@@ -25,6 +27,10 @@ function Productcard({product}: ProductCardProps) {
       </div>
       <div className="flex justify-between items-center">
         <p className="text-body-bold">${product.price}</p>
+        <HeartFavorite
+          product={product}
+          updateSignedInUser={updateSignedInUser}
+        />
       </div>
     </Link>
   );
