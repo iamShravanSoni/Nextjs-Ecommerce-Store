@@ -38,7 +38,7 @@ export const GET = async (req: NextRequest) => {
   } catch (err) {
     console.error("[users_GET]", err);
     return new NextResponse(
-      JSON.stringify({ message: "Internal Server Error", error: err.message }),
+      JSON.stringify({ message: "Internal Server Error"}),
       { status: 500 }
     );
   }

@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import Loader from "@/components/Loader"
 import Productcard from "@/components/ui/Productcard"
 import { getProductDetail } from "@/lib/actions/action"
@@ -70,7 +71,5 @@ const Wishlist = () => {
     </div>
   )
 }
-
-export const dynamic = "force-dynamic";
 
 export default Wishlist
