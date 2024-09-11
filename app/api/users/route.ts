@@ -20,23 +20,12 @@ export const GET = async (req: NextRequest) => {
 
     // When the user sign-in for the first time, create a new user for them
     if (!user) {
-      try {
-        user = await User.create({ clerkId: userId });
-        await user.save();
-      } catch (error) {
-        if (error.code === 11000) {
-          return new NextResponse(
-            JSON.stringify({ message: "User already exists" }),
-            { status: 409 }
-          );
-        }
-        throw error;
-      }
+      user = await User.create({ clerkId: userId });
+      await user.save();
     }
 
     return NextResponse.json(user, { status: 200 });
   } catch (err) {
-    console.error("[users_GET]", err);
     return new NextResponse(
       JSON.stringify({ message: "Internal Server Error"}),
       { status: 500 }
