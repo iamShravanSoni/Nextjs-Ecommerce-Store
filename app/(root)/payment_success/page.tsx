@@ -27,4 +27,6 @@ const SuccessfulPayment = () => {
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default SuccessfulPayment;
