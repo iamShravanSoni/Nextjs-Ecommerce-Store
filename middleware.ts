@@ -1,20 +1,14 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest, NextResponse } from "next/server";
 
-export default clerkMiddleware((auth, req: NextRequest) => {
-  const pathname = req.nextUrl.pathname;
+const isProtectedRoute = createRouteMatcher([
+  "/wishlist(.*)",
+  "/payment_success(.*)",
+  "/cart(.*)",
+  "/orders(.*)",
+]);
 
-  // Allow access to the sign-in route without authentication
-  if (pathname === "/sign-in" || pathname === "/sign-up") {
-    return NextResponse.next();
-  }
-
-  // Redirect unauthenticated users to the sign-in page
-  if (auth().userId) {
-    return NextResponse.next();
-  } else {
-    return NextResponse.redirect(new URL("/sign-in", req.url));
-  }
+export default clerkMiddleware((auth, req) => {
+  if (isProtectedRoute(req)) auth().protect();
 });
 
 export const config = {
